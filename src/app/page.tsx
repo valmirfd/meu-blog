@@ -1,16 +1,20 @@
-import { postRepository } from "@/repositories/post";
+import { Container } from "@/components/Container";
+import { PostsList } from "@/components/PostsList";
+import { SpinLoader } from "@/components/SpinLoader";
+import { Suspense } from "react";
+
 
 
 
 export default async function HomePage() {
-  const posts = await postRepository.findAll();
+
 
 
   return (
-    <div>
-      {posts.map(post => {
-        return <p key={post.id}>{post.title}</p>
-      })}
-    </div>
+    <Container>
+      <Suspense fallback={<SpinLoader />}>
+        <PostsList />
+      </Suspense>
+    </Container>
   );
 }
